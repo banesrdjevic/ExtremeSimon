@@ -2,25 +2,43 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var controls = require('../../Access')
 
-var styles = {
+var styles = {container:{
 		background: 'white',
-		height: '150px',
+		height: '200px',
 		width: '800px',
 		display: 'inline-block',
 		textAlign: 'center',
-		verticalAlign: 'middle',
 		lineHeight: '100px',
 		fontSize: '100px'
-	};
+	},
+	displayTimes:{
+		display: 'inline-block'
+	},
+	milliseconds:{
+		color: "red",
+		fontSize: "50px",
+	}
+};
 
 var TimerComponent = React.createClass({
 
 	getInitialState: function(){
 		return{
-			startTime: new Date(),
+			startTime: controls.startTime,
 			currentTime: new Date(),
-			timer: '00:00:00:000'
+			timer: '00:00:00:000',
+			hours: '00:',
+			minutes: '00:',
+			seconds: '00',
+			milliseconds: '000'
 		};
+	},
+
+	updateDisplayTimes: function(hours, minutes, seconds, milliseconds){
+		this.state.hours = hours + ":";
+		this.state.minutes = minutes + ":";
+		this.state.seconds = seconds;
+		this.state.milliseconds = milliseconds;
 	},
 
 	msToTime: function(s){
@@ -44,6 +62,8 @@ var TimerComponent = React.createClass({
 		  	ms = '0' + ms;
 		  }
 
+		  this.updateDisplayTimes(addZ(hrs), addZ(mins), addZ(secs), ms);
+
 		  return addZ(hrs) + ':' + addZ(mins) + ':' + addZ(secs) + '.' + ms;
 	},
 
@@ -54,12 +74,15 @@ var TimerComponent = React.createClass({
 			var millisecondsPassed = currentTime - this.state.startTime;
 			this.setState({timer: this.msToTime(millisecondsPassed)});
 		}
+		else{
+			this.state.startTime = new Date();
+		}
 	},
 
 	interval: null,
 
 	componentDidMount: function () {
-    	this.interval = setInterval(this.updateTimer, 1);
+   		this.interval = setInterval(this.updateTimer, 3);
   	},
 
   	componentWillUnmount: function () {
@@ -68,7 +91,12 @@ var TimerComponent = React.createClass({
 
 	render: function(){
 		var timer = this.state.timer;
-		return <div style={styles}>{timer}</div>;
+		return <div style={styles.container}>
+			<div id="hours" style={styles.displayTimes}>{this.state.hours}</div>
+			<div id="minutes" style={styles.displayTimes}>{this.state.minutes}</div>
+			<div id="seconds" style={styles.displayTimes}>{this.state.seconds}</div>
+			<div id="milliseconds" style={styles.milliseconds}>{this.state.milliseconds}</div>
+		</div>;
 	}
 })
 

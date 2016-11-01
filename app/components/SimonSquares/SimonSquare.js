@@ -4,17 +4,6 @@ var controls = require('../../Access')
 
 var backgroundColors = controls.backgroundColors;
 
-// var styles = {
-// 		background: 'red',
-// 		height: '100px',
-// 		width: '100px',
-// 		display: 'inline-block',
-// 		marginLeft: '10px',
-// 		marginBottom: '10px',
-// 		border: '5px solid black'
-// 		// position: 'fixed'		
-// 	};
-
 var SimonSquare = React.createClass({
 
 	getInitialState: function(){
@@ -25,14 +14,14 @@ var SimonSquare = React.createClass({
 			clicked: false,
 			correct: false,
 			styles : {
-				background: 'red',
+				background: backgroundColors[number],
 				height: '100px',
 				width: '100px',
 				display: 'inline-block',
-				marginLeft: '10px',
+				marginLeft: '5px',
+				marginRight: "5px",
 				marginBottom: '10px',
-				border: '5px solid black'
-				// position: 'fixed'		
+				border: '5px solid transparent'	
 			}
 		};
 	},
@@ -57,23 +46,29 @@ var SimonSquare = React.createClass({
 
 	setClicked: function(){
 		var state = this.state;
-		if (state.clicked == false && controls.started){
-			this.setState({clicked: true});
-			this.state.clicked = true;
-			if (state.backgroundColor==controls.color){
-				this.setState({correct: true});
-				this.state.correct = true;
-				this.props.victoryCheck();
+		if (!controls.victory){
+			if (state.clicked == false && controls.started){
+				this.setState({clicked: true});
+				this.state.clicked = true;
+				if (state.backgroundColor==controls.currentColor){
+					this.props.updateSquaresLeft(-1);
+					this.setState({correct: true});
+					this.state.correct = true;
+					this.props.victoryCheck();
+				}
+				else{
+					state.styles.border ='5px solid red';
+					this.setState({correct: false});
+				}
 			}
 			else{
-				state.styles.border ='5px solid red';
+				if (state.clicked && state.correct){
+					this.props.updateSquaresLeft(1);
+				};
+				state.styles.border ='5px solid transparent';
+				this.setState({clicked: false});
 				this.setState({correct: false});
 			}
-		}
-		else{
-			state.styles.border ='5px solid black';
-			this.setState({clicked: false});
-			this.setState({correct: false});
 		}
 	},
 
@@ -83,7 +78,7 @@ var SimonSquare = React.createClass({
 
 	componentDidMount: function () {
     	this.backgroundColorInterval = setInterval(this.colorChanger, controls.simonSquaresTiming);
-  		this.borderInterval = setInterval(this.changeBorderColor, 50);
+  		this.borderInterval = setInterval(this.changeBorderColor, 150);
   	},
 
   	componentWillUnmount: function () {

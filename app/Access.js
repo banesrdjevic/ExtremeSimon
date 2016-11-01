@@ -1,10 +1,18 @@
+// var number = Math.floor((Math.random() * (controls.backgroundColors.length-1)) + 1);
+
+var backgroundColors = ['red','blue','green','turquoise', 'black', 'purple', 'brown', 'orange'];
+
+var number = Math.floor((Math.random() * (backgroundColors.length-1)) + 1);
+var randomNumber = Math.floor((Math.random() * (backgroundColors.length-1)) + 1);
+
 var controls = {
-	backgroundColors: ['red','blue','green','red','turquoise', 'black', 'purple', 'brown', 'orange'],
+	backgroundColors: backgroundColors,
 	simonSquaresTiming: 3000,
 	simonSaysTiming: 3000,
-	currentColor: 'red',
+	currentColor: backgroundColors[number],
 	started: false,
-	victory: false
+	victory: false,
+	startTime: new Date()
 	};
 
 module.exports=controls;

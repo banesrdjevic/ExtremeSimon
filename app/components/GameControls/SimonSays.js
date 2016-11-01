@@ -5,21 +5,30 @@ var controls = require('../../Access');
 var backgroundColors = controls.backgroundColors;
 
 var styles = {
-		background: 'white',
-		height: '50px',
-		width: '800px',
-		textAlign: 'center',
-		marginBottom: '50px',
-		verticalAlign: 'middle',
-		color: 'red',
-		fontSize: '50px'
+		matcher:{
+			background: controls.currentColor,
+			height: "605px",
+			width: '300px',
+			textAlign: 'center',
+			marginBottom: '50px',
+			verticalAlign: 'middle',
+			color: controls.currentColor,
+			fontSize: '50px'
+		},
+		text:{
+			height: "60px",
+			width: "75%",
+			textAlign: "center",
+			fontSize: "50px",
+			marginTop: "140px"
+		}
 	};
 
 var SimonSays = React.createClass({
 	getInitialState: function(){
 		var number = Math.floor((Math.random() * (backgroundColors.length-1)) + 1);
 		return{
-			color: 'red'
+			color: controls.currentColor
 		};
 	},
 
@@ -27,18 +36,15 @@ var SimonSays = React.createClass({
 		if(!controls.victory && controls.started){
 			var number = Math.floor((Math.random() * (backgroundColors.length-1)) + 1);
 			var color = backgroundColors[number];
-			styles.color = color;
-			this.setState({color: color});
-			controls.color = color;
+			styles.matcher.background = color;
+			this.setState({background: color});
+			controls.currentColor = color;
 		}
 	},
 
 	successText: function(){
 		if(controls.victory){
 			this.setState({color: "SUCCESS!"});
-		}
-		else if(!controls.started){
-			this.setState({color: "Ready when you are..."});
 		}
 	},
 
@@ -57,7 +63,10 @@ var SimonSays = React.createClass({
 
 	render: function(){
 		var color = this.state.color.toUpperCase();
-		return <div style={styles}>{color}</div>
+		return (<div>
+					<div style={styles.matcher}></div>
+				</div>
+			)
 	}
 })
 
