@@ -15,12 +15,12 @@ var SimonSquare = React.createClass({
 			correct: false,
 			styles : {
 				background: backgroundColors[number],
-				height: '100px',
-				width: '100px',
+				height: '15%',
+				width: '12%',
 				display: 'inline-block',
 				marginLeft: '5px',
 				marginRight: "5px",
-				marginBottom: '10px',
+				marginBottom: '5px',
 				border: '5px solid transparent'	
 			}
 		};

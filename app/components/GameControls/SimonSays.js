@@ -7,20 +7,19 @@ var backgroundColors = controls.backgroundColors;
 var styles = {
 		matcher:{
 			background: controls.currentColor,
-			height: "605px",
-			width: '300px',
+			height: "534px",
+			width: '66%',
 			textAlign: 'center',
 			marginBottom: '50px',
 			verticalAlign: 'middle',
 			color: controls.currentColor,
-			fontSize: '50px'
+			fontSize: '50px',
+			marginBottom: "auto",
+			marginTop: "120px"
 		},
-		text:{
-			height: "60px",
-			width: "75%",
-			textAlign: "center",
-			fontSize: "50px",
-			marginTop: "140px"
+		container:{
+			height: "100%",
+			width: "100%"
 		}
 	};
 

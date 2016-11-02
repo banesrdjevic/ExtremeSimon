@@ -3,9 +3,9 @@ var ReactDOM = require('react-dom');
 var SimonSquare = require('./SimonSquare');
 var controls = require('../../Access')
 
-var width = 800;
 var styles = {
-
+	width: "100%",
+	height: "600px"
 	};
 
 var SimonSquaresContainer = React.createClass({

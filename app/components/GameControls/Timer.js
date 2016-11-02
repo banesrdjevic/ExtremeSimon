@@ -4,8 +4,8 @@ var controls = require('../../Access')
 
 var styles = {container:{
 		background: 'white',
-		height: '200px',
-		width: '800px',
+		height: '120px',
+		width: '100%',
 		display: 'inline-block',
 		textAlign: 'center',
 		lineHeight: '100px',
@@ -15,6 +15,7 @@ var styles = {container:{
 		display: 'inline-block'
 	},
 	milliseconds:{
+		display: 'inline-block',
 		color: "red",
 		fontSize: "50px",
 	}
@@ -72,6 +73,7 @@ var TimerComponent = React.createClass({
 			var currentTime = this.state.currentTime = new Date();
 			this.state.currentTime = currentTime;
 			var millisecondsPassed = currentTime - this.state.startTime;
+			controls.time = this.msToTime(millisecondsPassed);
 			this.setState({timer: this.msToTime(millisecondsPassed)});
 		}
 		else{

@@ -4,19 +4,18 @@ var GameContainer = require('./Containers/GameContainer')
 var HighScoreContainer = require('./Containers/HighScoreContainer')
 
 var styles = {
-	container:{width: "1800px"},
+	container:{width: "1400px", marginLeft: "auto", marginRight: "auto"},
 	highScore:{display: "inline-block", float: "left"},
-	game:{height: "1000px", width:"900px", display: "inline-block"}
+	game:{}
 	}
 
 var App = React.createClass({
 	render: function(){
-		console.log(styles.highScore);
+				// <div style={styles.highScore}>
+				// 	<HighScoreContainer />
+				// </div>
 		return (
 			<div style={styles.container}>
-				<div style={styles.highScore}>
-					<HighScoreContainer />
-				</div>
 				<div style={styles.game}>
 					<GameContainer />
 				</div>

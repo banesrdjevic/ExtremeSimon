@@ -12,7 +12,8 @@ var controls = {
 	currentColor: backgroundColors[number],
 	started: false,
 	victory: false,
-	startTime: new Date()
+	startTime: new Date(),
+	time: 0
 	};
 
 module.exports=controls;
